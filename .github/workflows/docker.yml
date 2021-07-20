@@ -1,4 +1,4 @@
-name: goreleaser
+name: DockerHub
 
 on:
   push:
