@@ -26,8 +26,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
 
-      - name: ENV
-        run: env
       - name: ls
         run: tree -L 2
       - name: Log in to Docker Hub
