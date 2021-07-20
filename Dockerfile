@@ -1,3 +1,11 @@
+
+
+
+
+
+
+
+
 FROM harbor.formovie.net/library/alpine:latest
 
 ENV APPS="go-rest-test"
