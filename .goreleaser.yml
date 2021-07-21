@@ -34,8 +34,5 @@ changelog:
 
 dockers:
   - image_templates:
-      - "wylfocus/{{.ProjectName}}:latest"
-      - "wylfocus/{{.ProjectName}}:{{ .Tag }}"
-      - "wylfocus/{{.ProjectName}}:{{ .Tag }}-{{ .Env.GO_VERSION }}"
-      - "wylfocus/{{.ProjectName}}:v{{ .Major }}"
+      - "wylfocus/{{.ProjectName}}"
     dockerfile: Dockerfile_goreleaser

@@ -1,4 +1,4 @@
-package main
+package web
 
 import (
 	"fmt"
@@ -9,7 +9,7 @@ import (
 	"testing"
 )
 
-func performRequest(c *IndexClient, method, path string) *httptest.ResponseRecorder {
+func performRequest(c *HttpClient, method, path string) *httptest.ResponseRecorder {
 
 	req := httptest.NewRequest(method, path, nil)
 	w := httptest.NewRecorder()
@@ -19,7 +19,7 @@ func performRequest(c *IndexClient, method, path string) *httptest.ResponseRecor
 
 func TestHttpServerCtx_BuildApplication(t *testing.T) {
 	gin.SetMode(gin.ReleaseMode)
-	c := NewIndexClient()
+	c := NewHttpClient()
 
 	w := performRequest(c, http.MethodGet, "/err/404")
 	assert.Equal(t, http.StatusNotFound, w.Code)
