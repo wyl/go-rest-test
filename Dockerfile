@@ -1,5 +1,5 @@
-
 FROM harbor.formovie.net/library/alpine:latest
+
 ENV APPS="go-rest-test"
 ENV WORK_DIR=/app/${APPS}
 

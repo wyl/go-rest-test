@@ -1,6 +1,6 @@
 
 releaser:
-	goreleaser --rm-dist;
+	goreleaser --snapshot --skip-publish --rm-dist;
 
 build: releaser
 	docker build -t go-rest-test:latest .

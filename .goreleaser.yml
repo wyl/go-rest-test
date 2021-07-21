@@ -32,8 +32,3 @@ changelog:
     exclude:
       - '^docs:'
       - '^test:'
-
-dockers:
-  - image_templates:
-      - "wylfocus/{{.ProjectName}}"
-    dockerfile: Dockerfile_goreleaser

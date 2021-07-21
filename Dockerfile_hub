@@ -1,0 +1,21 @@
+FROM goreleaser/goreleaser as Builder
+
+ENV GOPATH="/go/go"
+ENV GOPROXY="https://goproxy.cn"
+
+COPY . .
+
+RUN ls
+RUN goreleaser --snapshot --skip-publish --rm-dist
+
+FROM harbor.formovie.net/library/alpine:latest
+ENV APPS="go-rest-test"
+ENV WORK_DIR=/app/${APPS}
+
+COPY --from=Builder /go/dist/go-rest-test_linux_amd64/go-rest-test ${WORK_DIR}/
+
+EXPOSE 80
+
+WORKDIR ${WORK_DIR}
+
+CMD ["sh", "-c", "./go-rest-test"]
