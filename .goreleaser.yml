@@ -11,6 +11,7 @@ before:
 #    - go generate ./...
 builds:
 
+
 archives:
   - replacements:
       darwin: Darwin
