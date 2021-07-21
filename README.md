@@ -1,5 +1,5 @@
 # go-rest-test
-http 测试服务；
+http 网络测试服务；
 
 ```go
 [GIN-debug] GET    /healthz                  --> go-rest-test/web.(*HttpClient).buildHandler.func1 (4 handlers)
@@ -30,6 +30,13 @@ http 测试服务；
 [GIN-debug] Listening and serving HTTP on :80
 
 
+```
+curl --request GET --url http://localhost:80/ip
+curl --request POST --url http://localhost:80/post --header 'content-type: application/json' --data '{"name": "ww","age": 111}'
+curl --request POST --url http://localhost:80/form --header 'content-type: multipart/form-data; boundary=---011000010111000001101001' --form user=www--form password=222
+curl --request POST --url 'http://localhost:80/query?user=11&password=22' --header 'content-type: multipart/form-data; boundary=---011000010111000001101001'
+curl --request GET --url http://localhost:80/1s
+```
 
 
 
