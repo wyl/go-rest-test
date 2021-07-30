@@ -24,11 +24,12 @@ http 网络测试服务；
 [GIN-debug] POST   /post                     --> go-rest-test/web.(*HttpClient).buildHandler.func12 (4 handlers)
 [GIN-debug] POST   /form                     --> go-rest-test/web.(*HttpClient).buildHandler.func13 (4 handlers)
 [GIN-debug] POST   /query                    --> go-rest-test/web.(*HttpClient).buildHandler.func14 (4 handlers)
+[GIN-debug] GET    /file/:size               --> go-rest-test/web.(*HttpClient).buildHandler.func15 (4 handlers)
+
 
 ```
 
 [GIN-debug] Listening and serving HTTP on :80
-
 
 ```
 curl --request GET --url http://localhost:80/ip
@@ -36,6 +37,7 @@ curl --request POST --url http://localhost:80/post --header 'content-type: appli
 curl --request POST --url http://localhost:80/form --header 'content-type: multipart/form-data; boundary=---011000010111000001101001' --form user=www--form password=222
 curl --request POST --url 'http://localhost:80/query?user=11&password=22' --header 'content-type: multipart/form-data; boundary=---011000010111000001101001'
 curl --request GET --url http://localhost:80/1s
+curl --request GET --url http://localhost:80/file/1
 ```
 
 

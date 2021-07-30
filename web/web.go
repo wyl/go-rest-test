@@ -1,9 +1,15 @@
 package web
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
+	"github.com/google/uuid"
+	"io"
+	"io/ioutil"
 	"net/http"
+	"os"
+	"strconv"
 	"time"
 )
 
@@ -83,4 +89,50 @@ func (ic *HttpClient) buildHandler() {
 			context.JSON(http.StatusOK, gin.H{"status": 0, "data": param})
 		}
 	})
+
+	ic.GET("/file/:size", func(context *gin.Context) {
+		var (
+			fileSize      = 1
+			unitFile, err = os.Open("assets/unit")
+			unitBytes     = make([]byte, 1024*1024)
+			tmpFileName   = fmt.Sprintf("tmp-%v", uuid.New())
+			fileSizeStr   = context.Param("size")
+			maxFileSize   = 1024 * 4
+		)
+		defer unitFile.Close()
+		if err != nil {
+			context.JSON(http.StatusInternalServerError, "11")
+			return
+		}
+		_, _ = io.ReadFull(unitFile, unitBytes)
+
+		fileSize, err = strconv.Atoi(fileSizeStr)
+
+		if err != nil {
+			context.JSON(http.StatusBadRequest, "must be a number!")
+			return
+		}
+
+		if fileSize > maxFileSize {
+			context.JSON(http.StatusBadRequest, fmt.Sprintf("File size is greater then %v! ", maxFileSize))
+			return
+		}
+
+		file, err := ioutil.TempFile("", fmt.Sprintf(tmpFileName))
+
+		if err != nil {
+			context.JSON(http.StatusInternalServerError, err)
+			return
+		}
+
+		defer os.Remove(file.Name())
+
+		for i := 0; i < fileSize; i++ {
+			file.Write(unitBytes)
+		}
+
+		context.Header("Content-Disposition", fmt.Sprintf(`attachment; filename="%vm"`, fileSize))
+		context.File(file.Name())
+	})
+
 }
