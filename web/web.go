@@ -101,7 +101,7 @@ func (ic *HttpClient) buildHandler() {
 		)
 		defer unitFile.Close()
 		if err != nil {
-			context.JSON(http.StatusInternalServerError, "11")
+			context.JSON(http.StatusInternalServerError, err)
 			return
 		}
 		_, _ = io.ReadFull(unitFile, unitBytes)
